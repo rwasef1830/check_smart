@@ -44,6 +44,9 @@ result = []
 count_warning = 0
 count_critical = 0
 
+if device.assessment != 'PASS':
+    count_critical = count_critical + 1
+
 for a in attributes:
     warning = None
     critical = None
@@ -68,8 +71,8 @@ for a in attributes:
     result.append([a.name, a.type, float(a.value), float(a.worst), float(warning), float(critical), a.raw, state, thresh])
 
 # create output
-attribute_num = len(result)
-count_ok = len(result) - count_warning - count_critical
+attribute_num = len(result) + 1
+count_ok = len(result) + 1 - count_warning - count_critical
 
 overall_state = 0
 output = "OK: "
